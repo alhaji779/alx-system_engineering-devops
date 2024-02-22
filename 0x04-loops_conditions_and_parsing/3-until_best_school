@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This is a loop of a statement 10 times using until keyword
+i=1
+until [ $i -gt 10 ]; do
+	echo "Best School"
+	((i++))
+done
