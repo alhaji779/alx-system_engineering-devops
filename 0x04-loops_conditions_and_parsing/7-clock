@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script mimicks a clock system
+i=0
+j=1
+while [ $i -ne 13 ]; do
+	echo "Hour: $i"
+		((i++))
+		while [ $j -lt 60 ]; do
+			echo "$j"
+			((j++))
+	done
+	((j = 1))
+done
