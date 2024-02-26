@@ -1,21 +1,18 @@
 #!/usr/bin/env bash
 # This scripts kills a process given certain conditions
 
-file = "/var/run/myscript.pid"
-function kilterm {
-	echo "I hate the kill command"
-	sudo rm -f $file
-	exit
-	}
-function kilquit {
-	sudo rm -f $file
-	exit
-	}
-sudo bash -c "echo $$ > $file"
-trap kilterm SIGTERM
-trap kilquit SIGQUIT
-trap "echo 'Y U no love me?!'" SIGINT
-while true; do
-	echo "To infinity and beyond"
-	sleep 2
+kil() {
+  rm /var/run/myscript.pid
+  exit
+}
+
+echo "$$" > /var/run/myscript.pid
+
+while true
+do
+  echo "To infinity and beyond"
+  sleep 2
+  trap 'echo "Y U no love me?!"' SIGINT
+  trap 'echo "I hate the kill command" && kil' SIGTERM
+  trap 'kil' SIGQUIT
 done
