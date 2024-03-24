@@ -1,0 +1,36 @@
+Explanation of Specifics:
+
+What is a server?
+A server is a computer or system that provides services or resources to other computers, known as clients, over a network.
+
+What is the role of the domain name?
+The domain name is a human-readable label used to identify a website. It maps to an IP address, allowing users to access websites using memorable names instead of numerical IP addresses.
+
+What type of DNS record is "www" in www.foobar.com?
+"www" is a subdomain, and in this context, it's typically a CNAME (Canonical Name) record that points to the root domain foobar.com.
+
+What is the role of the web server?
+The web server (Nginx) serves static content and handles HTTP requests from clients, delivering web pages and other web resources to users.
+
+What is the role of the application server?
+The application server executes dynamic code, interacts with the database, and generates dynamic content based on user requests. It handles business logic and application-specific tasks.
+
+What is the role of the database?
+The database (MySQL) stores and manages structured data required by the application, such as user accounts, posts, settings, etc.
+
+What is the server using to communicate with the computer of the user requesting the website?
+The server communicates with the user's computer over the Internet using the HTTP protocol. When a user requests a web page, their browser sends an HTTP request to the server, and the server responds with the requested content.
+
+Issues with the Infrastructure:
+
+Single Point of Failure (SPOF):
+Since there's only one server, any failure in hardware, software, or network connectivity can lead to downtime for the entire website.
+
+Downtime During Maintenance:
+When performing maintenance tasks such as deploying new code or updating software, the web server typically needs to be restarted, resulting in downtime for the website.
+
+Limited Scalability:
+With only one server, it's challenging to handle a sudden increase in traffic. Scaling horizontally (adding more servers) would require additional infrastructure and configuration.
+
+To address these issues, one could implement solutions like load balancing, redundancy, and scalable infrastructure using technologies like Kubernetes, Docker, or cloud platforms.
+
