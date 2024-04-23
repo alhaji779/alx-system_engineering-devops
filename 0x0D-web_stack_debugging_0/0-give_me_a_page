@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Get Apache server running
+sudo service apache2 restart
