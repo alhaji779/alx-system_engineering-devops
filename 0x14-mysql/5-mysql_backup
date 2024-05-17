@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Script to automate backup of database
 
 # MySQL dump file name
 dump_file="backup.sql"
