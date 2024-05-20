@@ -18,7 +18,8 @@ if __name__ == "__main__":
         t_title = t.get("title")
         t_status = t.get("completed")
         data_dict[u].append({"task": "{}".format(t_title),
-            "completed": t_status, "username": "{}".format(user_name)})
+                            "completed": t_status,
+                             "username": "{}".format(user_name)})
 
     with open("{}.json".format(u), "w") as json_file:
         json.dump(data_dict, json_file)
