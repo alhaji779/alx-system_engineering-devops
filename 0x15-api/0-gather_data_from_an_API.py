@@ -2,8 +2,8 @@
 """ A python script to fetch data from API
 """
 
-import sys
 import requests
+import sys
 
 if __name__ == "__main__":
     url = 'https://jsonplaceholder.typicode.com/'
@@ -12,12 +12,11 @@ if __name__ == "__main__":
     todo_all = todos.json()
     completed = []
     for todo in todo_all:
-        if todo.get("completed") == True:
+        if todo.get("completed") is True:
             completed.append(todo)
 
     print("Employee {} is done with tasks({}/{}):".format(users.
-          get("name"),len(completed),len(todo_all)))
+          get("name"), len(completed), len(todo_all)))
 
-    #print(completed)
     for t in completed:
         print("\t {}".format(t.get("title")))
