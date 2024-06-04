@@ -4,27 +4,28 @@ import sys
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=None):
+def recurse(subreddit, hot_list=[], after=None, count=0):
     """Returns a list of titles of all hot articles
        for a given subreddit.
     """
-    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {'User-Agent': 'my-app/0.0.1'}
-    params = {'after': after, 'limit': 100}
-
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    headers = {
+        "User-Agent": "Mozilla 5.0.0"}
     try:
-        response = requests.get(url, headers=headers, params=params,
-                                allow_redirects=False)
-        if response.status_code == 200:
-            data = response.json()
-            posts = data['data']['children']
-            for post in posts:
-                hot_list.append(post['data']['title'])
-            after = data['data']['after']
-            if after:
-                return recurse(subreddit, hot_list, after)
-            return hot_list
+        if after:
+            count = get('https://www.reddit.com/r/{}/hot.json?after={}'.format(
+                subreddit, after), headers=head).json().get('data')
         else:
-            return None
-    except requests.RequestException:
+            count = get('https://www.reddit.com/r/{}/hot.json'.format(
+                subreddit), headers=head).json().get('data')
+        hotlist += [dic.get('data').get('title')
+                    for dic in count.get('children')]
+        if count.get('after'):
+            return recurse(subreddit, hotlist, after=count.get('after'))
+        return hotlist
+    except Exception:
         return None
+
+
+if __name__ == "__main__":
+    recurse(argv[1])
